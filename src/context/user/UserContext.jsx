@@ -94,9 +94,14 @@ export const UserProvider = ({ children }) => {
   };
 
   const updateProfile = async (profile) => {
+    const config = {
+      headers: {
+        'Content-Type': 'Application/json',
+      },
+    };
     try {
       dispatch({ type: 'SET_LOADING' });
-      const res = axios.put(`${BACKEND_URL}/auth/profile`);
+      const res = axios.put(`${BACKEND_URL}/auth/profile`, profile, config);
     } catch (err) {
       dispatch({
         type: 'PROFILE_FAIL',
