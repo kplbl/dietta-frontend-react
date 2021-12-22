@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import UserContext from '../context/user/UserContext';
 
 const Navbar = () => {
-  //const authContext = useContext(AuthContext);
-
-  //const { isAuthenticated, user, logout } = authContext;
+  const userContext = useContext(UserContext);
+  const { authenticated, logout } = userContext;
 
   return (
     <nav className="bg-gray-500 flex items-center justify-between flex-wrap p-6">
@@ -68,7 +68,7 @@ const Navbar = () => {
           </Link>
         </div>
       </div>
-      {/* {isAuthenticated ? (
+      {authenticated ? (
         <button
           onClick={logout}
           className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600"
@@ -82,7 +82,7 @@ const Navbar = () => {
         >
           Prijava
         </Link>
-      )} */}
+      )}
     </nav>
   );
 };
