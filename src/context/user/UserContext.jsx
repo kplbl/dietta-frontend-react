@@ -9,7 +9,16 @@ const BACKEND_URL = 'http://127.0.0.1:5000/api';
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
+  const initialState = {
+    token: null,
+    authenticated: false,
+    loading: false,
+    user: {},
+    error: null,
+  };
+
   const [token, setToken] = useLocalStorage('token');
+  const [state, dispatch] = useReducer(userReducer, initialState);
 
   const loadUser = async () => {
     if (token) {
@@ -111,16 +120,6 @@ export const UserProvider = ({ children }) => {
   };
 
   const clearErrors = () => dispatch({ type: 'CLEAR_ERRORS' });
-
-  const initialState = {
-    token: null,
-    authenticated: false,
-    loading: false,
-    user: {},
-    error: null,
-  };
-
-  const [state, dispatch] = useReducer(userReducer, initialState);
 
   return (
     <UserContext.Provider
