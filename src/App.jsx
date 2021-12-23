@@ -6,7 +6,6 @@ import Foods from './pages/foods/Foods';
 import Profile from './pages/profile/Profile';
 import LoginForm from './pages/user/LoginForm';
 import RegisterForm from './pages/user/RegisterForm';
-
 import { useEffect, useContext } from 'react';
 import UserContext from './context/user/UserContext';
 import useLocalStorage from './hooks/useLocalStorage';
