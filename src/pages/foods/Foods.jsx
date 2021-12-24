@@ -7,7 +7,7 @@ function Foods() {
   const [selected, setSelected] = useState(null);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const BACKEND_URL = 'http://127.0.0.1:5000/api';
 
@@ -15,10 +15,11 @@ function Foods() {
     try {
       setLoading(true);
       const res = await axios.get(`${BACKEND_URL}/foods/public`);
-      console.log(res);
+
       setData(res.data);
     } catch (err) {
       setError(err);
+      setData(null);
     } finally {
       setLoading(false);
     }
@@ -36,8 +37,29 @@ function Foods() {
       setData(res.data);
     } catch (err) {
       setError(err);
+      setData(null);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const removeFood = async (id) => {
+    try {
+      setLoading(true);
+      const res = await axios.delete(`${BACKEND_URL}/foods/${id}`);
+
+      setData(data.filter((food) => food._id !== id));
+    } catch (err) {
+      setError(err);
+      setData(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const onRemove = () => {
+    if (selected !== null) {
+      removeFood(selected);
     }
   };
 
@@ -45,12 +67,12 @@ function Foods() {
     getFoods();
   }, []);
 
-  if (!data) return <h2>No data</h2>;
+  if (!data) return <h3>No data</h3>;
 
   if (error) return <h3>{error}</h3>;
 
   if (loading) return <h3>Loading...</h3>;
-
+  console.log(data);
   return (
     <div className="container mx-auto">
       <AddFood addFood={addFood} getFoods={getFoods} />
@@ -83,7 +105,9 @@ function Foods() {
         </tbody>
       </table>
       <div>
-        <button className="btn bg-red-400 text-gray-100">Remove</button>
+        <button onClick={onRemove} className="btn bg-red-400 text-gray-100">
+          Remove
+        </button>
       </div>
     </div>
   );
