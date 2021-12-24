@@ -72,7 +72,7 @@ function Foods() {
   if (error) return <h3>{error}</h3>;
 
   if (loading) return <h3>Loading...</h3>;
-  console.log(data);
+
   return (
     <div className="container mx-auto">
       <AddFood addFood={addFood} getFoods={getFoods} />
