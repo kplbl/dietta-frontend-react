@@ -1,8 +1,9 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import UserContext from '../context/user/UserContext';
 
 const Navbar = () => {
+  const [open, setOpen] = useState(false);
   const userContext = useContext(UserContext);
   const { authenticated, logout } = userContext;
 
@@ -27,7 +28,10 @@ const Navbar = () => {
       </div>
 
       <div className="block lg:hidden">
-        <button className="flex items-center px-3 py-2 border rounded text-gray-800 border-gray-600 hover:text-gray-600 hover:border-gray-400">
+        <button
+          className="flex items-center px-3 py-2 border rounded text-gray-800 border-gray-600 hover:text-gray-600 hover:border-gray-400"
+          onClick={() => setOpen(!open)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
@@ -46,7 +50,7 @@ const Navbar = () => {
       </div>
 
       <div className="w-full flex-grow lg:flex lg:items-center lg:w-auto">
-        <div className="text-sm lg:flex-grow">
+        <div className={`text-sm lg:flex-grow ${!open && 'hidden'} lg:block`}>
           <Link
             to="/diary"
             className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600 mr-2"
