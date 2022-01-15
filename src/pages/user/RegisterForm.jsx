@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import UserContext from '../../context/user/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
   const [form, setForm] = useState({
@@ -11,6 +12,8 @@ const RegisterForm = () => {
 
   const { register } = userContext;
 
+  const navigate = useNavigate();
+
   const onChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -18,6 +21,7 @@ const RegisterForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     register(form.username, form.password, form.email);
+    navigate('/');
   };
 
   return (

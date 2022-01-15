@@ -1,13 +1,15 @@
 import { useContext } from 'react';
 import { useState } from 'react';
 import UserContext from '../../context/user/UserContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const [form, setForm] = useState({
     username: '',
     password: '',
   });
+
+  const navigate = useNavigate();
 
   const userContext = useContext(UserContext);
 
@@ -20,6 +22,7 @@ const LoginForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     login(form.username, form.password);
+    navigate('/');
   };
 
   return (
