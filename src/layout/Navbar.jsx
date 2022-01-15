@@ -5,7 +5,7 @@ import UserContext from '../context/user/UserContext';
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const userContext = useContext(UserContext);
-  const { authenticated, logout } = userContext;
+  const { authenticated, logout, user } = userContext;
 
   return (
     <nav className="bg-gray-500 flex items-center justify-between flex-wrap p-6">
@@ -77,7 +77,7 @@ const Navbar = () => {
           onClick={logout}
           className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600"
         >
-          Odjava
+          {user?.username} | Odjava
         </button>
       ) : (
         <Link
