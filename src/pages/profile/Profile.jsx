@@ -3,7 +3,7 @@ import UserContext from '../../context/user/UserContext';
 
 function Profile() {
   const userContext = useContext(UserContext);
-  const { updateProfile, user, authenticated } = userContext;
+  const { updateProfile, user, authenticated, loading } = userContext;
 
   //   const [form, setForm] = useState({
   //     username: '',
@@ -26,11 +26,12 @@ function Profile() {
   };
 
   const onSubmit = (e) => {
+    console.log(form);
     e.preventDefault();
     updateProfile(form);
   };
 
-  if (!authenticated) {
+  if (loading) {
     return <div>Profile</div>;
   }
 
