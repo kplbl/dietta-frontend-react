@@ -1,11 +1,11 @@
-const Entry = ({ food, amount, selected, setSelected, id }) => {
+const Entry = ({ food, amount, selectedRow, setSelectedRow, id }) => {
   const onClick = (e) => {
     e.preventDefault();
-    setSelected(id);
+    setSelectedRow(id);
   };
 
   return (
-    <tr onClick={onClick} className={selected === id ? 'bg-gray-300' : ''}>
+    <tr onClick={onClick} className={selectedRow === id ? 'bg-gray-300' : ''}>
       <td>{food}</td>
       <td>{amount}</td>
     </tr>
