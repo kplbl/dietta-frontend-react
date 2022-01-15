@@ -18,6 +18,7 @@ export const UserProvider = ({ children }) => {
   };
 
   const [token, setToken] = useLocalStorage('token');
+
   const [state, dispatch] = useReducer(userReducer, initialState);
 
   const loadUser = async () => {
@@ -96,7 +97,7 @@ export const UserProvider = ({ children }) => {
       dispatch({ type: 'GET_PROFILE', payload: res.data });
     } catch (err) {
       dispatch({
-        type: 'PROFILE_FAIL',
+        type: 'PROFILE_ERROR',
         payload: err.response.data.msg,
       });
     }
@@ -110,10 +111,11 @@ export const UserProvider = ({ children }) => {
     };
     try {
       dispatch({ type: 'SET_LOADING' });
-      const res = axios.put(`${BACKEND_URL}/auth/profile`, profile, config);
+      const res = await axios.put(`${BACKEND_URL}/auth/profile`, profile, config);
+      dispatch({ type: 'UPDATE_PROFILE', payload: res.data });
     } catch (err) {
       dispatch({
-        type: 'PROFILE_FAIL',
+        type: 'PROFILE_ERROR',
         payload: err.response.data.msg,
       });
     }
