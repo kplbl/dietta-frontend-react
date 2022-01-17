@@ -86,7 +86,7 @@ function Targets({ entries }) {
             className="bg-green-600 h-5 rounded"
             style={{ width: `${calc_percentage(calc_fats(entries), fat_target)}` + '%' }}
           >
-            {calc_fats(entries)} / {fat_target}
+            {calc_fats(entries)} / {fat_target} g
           </div>
         </div>
       </div>
