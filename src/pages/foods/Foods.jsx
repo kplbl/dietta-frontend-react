@@ -15,11 +15,9 @@ function Foods() {
     try {
       setLoading(true);
       const res = await axios.get(`${BACKEND_URL}/foods/public`);
-
       setData(res.data);
     } catch (err) {
       setError(err);
-      setData(null);
     } finally {
       setLoading(false);
     }
@@ -33,11 +31,10 @@ function Foods() {
     };
     try {
       setLoading(true);
-      const res = axios.post(`${BACKEND_URL}/foods`, newFood, config);
-      setData(res.data);
+      const res = await axios.post(`${BACKEND_URL}/foods`, newFood, config);
+      setData((prevState) => [...prevState, res.data]);
     } catch (err) {
       setError(err);
-      setData(null);
     } finally {
       setLoading(false);
     }
@@ -47,11 +44,9 @@ function Foods() {
     try {
       setLoading(true);
       const res = await axios.delete(`${BACKEND_URL}/foods/${id}`);
-
       setData(data.filter((food) => food._id !== id));
     } catch (err) {
       setError(err);
-      setData(null);
     } finally {
       setLoading(false);
     }
