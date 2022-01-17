@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import Loading from '../../layout/Loading';
 import Entry from './Entry';
 import Targets from './Targets';
+import AddEntry from './AddEntry';
 
 function Diary() {
   const [entries, setEntries] = useState(null);
@@ -15,8 +17,8 @@ function Diary() {
   const getEntries = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(`${BACKEND_URL}/diary`);
-      console.log(res.data);
+      const res = await axios.get(`${BACKEND_URL}/diary/today`);
+
       setEntries(res.data);
     } catch (err) {
       setError(err);
@@ -30,11 +32,28 @@ function Diary() {
     try {
       setLoading(true);
       const res = await axios.get(`${BACKEND_URL}/foods/public`);
-      console.log(res.data);
       setFoods(res.data);
     } catch (err) {
       setError(err);
-      setFoods(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const addEntry = async (entry) => {
+    const config = {
+      headers: {
+        'Content-Type': 'Application/json',
+      },
+    };
+
+    try {
+      setLoading(true);
+      const res = await axios.post(`${BACKEND_URL}/diary`, entry, config);
+
+      setData((prevState) => [...prevState, res.data]);
+    } catch (err) {
+      setError(err);
     } finally {
       setLoading(false);
     }
@@ -45,10 +64,14 @@ function Diary() {
     getFoods();
   }, []);
 
+  if (loading) return <Loading />;
+
   return (
     <div>
+      {foods && <AddEntry foods={foods} addEntry={addEntry} />}
+
       <h3>Dnevnik</h3>
-      {entries && <Targets />}
+      {entries && <Targets entries={entries} />}
       {entries && (
         <table>
           <thead>
@@ -58,14 +81,14 @@ function Diary() {
             </tr>
           </thead>
           <tbody>
-            {entries.map((entries) => (
+            {entries.map((entry) => (
               <Entry
-                key={entries._id}
-                //  food={foods.find((food) => food._id === entries.food).name}
-                amount={entries.amount}
+                key={entry._id}
+                food={entry.food.name}
+                amount={entry.amount}
                 selectedRow={selectedRow}
                 setSelected={setSelectedRow}
-                id={entries._id}
+                id={entry._id}
               />
             ))}
           </tbody>
