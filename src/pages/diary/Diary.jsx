@@ -51,7 +51,11 @@ function Diary() {
       setLoading(true);
       const res = await axios.post(`${BACKEND_URL}/diary`, entry, config);
 
-      setData((prevState) => [...prevState, res.data]);
+      // dont just put the returned entry into state, it doesn't
+      // contain the name and other data, just the id string of the food
+      // just get all entries, the data is added on the backend
+      //setEntries((prevState) => [...prevState, res.data]);
+      getEntries();
     } catch (err) {
       setError(err);
     } finally {
