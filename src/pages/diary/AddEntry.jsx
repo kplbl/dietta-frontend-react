@@ -22,7 +22,7 @@ function AddEntry({ foods, addEntry }) {
     <div>
       <form onSubmit={onSubmit}>
         <div>
-          <label>Ime</label>
+          <label>Food</label>
           <select
             className="inputbox"
             type="text"
@@ -38,7 +38,7 @@ function AddEntry({ foods, addEntry }) {
           </select>
         </div>
         <div>
-          <label>Opis</label>
+          <label>Amount</label>
           <input
             className="inputbox"
             type="number"
