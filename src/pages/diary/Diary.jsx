@@ -4,12 +4,13 @@ import Loading from '../../layout/Loading';
 import Entry from './Entry';
 import Targets from './Targets';
 import AddEntry from './AddEntry';
+import Entries from './Entries';
 
 function Diary() {
   const [entries, setEntries] = useState(null);
   const [foods, setFoods] = useState(null);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [selectedRow, setSelectedRow] = useState(false);
 
   const BACKEND_URL = 'http://127.0.0.1:5000/api';
@@ -70,6 +71,8 @@ function Diary() {
 
   if (loading) return <Loading />;
 
+  if (error) return <h2>Error</h2>;
+
   return (
     <div>
       {foods && <AddEntry foods={foods} addEntry={addEntry} />}
@@ -77,26 +80,7 @@ function Diary() {
       <h3>Dnevnik</h3>
       {entries && <Targets entries={entries} />}
       {entries && (
-        <table>
-          <thead>
-            <tr>
-              <th>Hrana</th>
-              <th>Količina</th>
-            </tr>
-          </thead>
-          <tbody>
-            {entries.map((entry) => (
-              <Entry
-                key={entry._id}
-                food={entry.food.name}
-                amount={entry.amount}
-                selectedRow={selectedRow}
-                setSelected={setSelectedRow}
-                id={entry._id}
-              />
-            ))}
-          </tbody>
-        </table>
+        <Entries entries={entries} selectedRow={selectedRow} setSelectedRow={setSelectedRow} />
       )}
     </div>
   );
