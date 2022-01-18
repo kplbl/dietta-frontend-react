@@ -49,44 +49,49 @@ const Navbar = () => {
         </button>
       </div>
 
-      <div className="w-full flex-grow lg:flex lg:items-center lg:w-auto">
-        <div className={`text-sm lg:flex-grow ${!open && 'hidden'} lg:block`}>
-          <Link
-            to="/diary"
-            className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600 mr-2"
-          >
-            Dnevnik
-          </Link>
-          <Link
-            to="/profile"
-            className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600 mr-2"
-          >
-            Profil
-          </Link>
+      <div className="w-full flex-grow md:flex md:items-center md:w-auto">
+        <div className={`text-sm md:flex-grow ${!open && 'hidden'} md:flex justify-between`}>
+          <div>
+            <Link
+              to="/diary"
+              className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600 mr-2"
+            >
+              Dnevnik
+            </Link>
+            <Link
+              to="/profile"
+              className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600 mr-2"
+            >
+              Profil
+            </Link>
 
-          <Link
-            to="/foods"
-            className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600 mr-2"
-          >
-            Hrana
-          </Link>
+            <Link
+              to="/foods"
+              className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600 mr-2"
+            >
+              Hrana
+            </Link>
+          </div>
+
+          <div className="place-self-end">
+            {authenticated ? (
+              <button
+                onClick={logout}
+                className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600"
+              >
+                {user?.username} | Odjava
+              </button>
+            ) : (
+              <Link
+                to="/login"
+                className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600 mr-2"
+              >
+                Prijava
+              </Link>
+            )}
+          </div>
         </div>
       </div>
-      {authenticated ? (
-        <button
-          onClick={logout}
-          className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600"
-        >
-          {user?.username} | Odjava
-        </button>
-      ) : (
-        <Link
-          to="/login"
-          className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600 mr-2"
-        >
-          Prijava
-        </Link>
-      )}
     </nav>
   );
 };
