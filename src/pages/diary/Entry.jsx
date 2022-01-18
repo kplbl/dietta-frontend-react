@@ -1,4 +1,4 @@
-const Entry = ({ food, amount, selectedRow, setSelectedRow, id }) => {
+const Entry = ({ food, amount, kcal, selectedRow, setSelectedRow, id }) => {
   const onClick = (e) => {
     e.preventDefault();
     setSelectedRow(id);
@@ -8,6 +8,8 @@ const Entry = ({ food, amount, selectedRow, setSelectedRow, id }) => {
     <tr onClick={onClick} className={selectedRow === id ? 'bg-gray-300' : ''}>
       <td>{food}</td>
       <td>{amount}</td>
+      <td>g</td>
+      <td>{(kcal * amount) / 100}</td>
     </tr>
   );
 };
