@@ -23,7 +23,6 @@ function Diary() {
       setEntries(res.data);
     } catch (err) {
       setError(err);
-      setEntries(null);
     } finally {
       setLoading(false);
     }
@@ -64,6 +63,18 @@ function Diary() {
     }
   };
 
+  const deleteEntry = async (id) => {
+    try {
+      setLoading(true);
+      const res = await axios.delete(`${BACKEND_URL}/diary/${id}`);
+      getEntries();
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     getEntries();
     getFoods();
@@ -79,9 +90,7 @@ function Diary() {
 
       <h3>Dnevnik</h3>
       {entries && <Targets entries={entries} />}
-      {entries && (
-        <Entries entries={entries} selectedRow={selectedRow} setSelectedRow={setSelectedRow} />
-      )}
+      {entries && <Entries entries={entries} deleteEntry={deleteEntry} />}
     </div>
   );
 }
