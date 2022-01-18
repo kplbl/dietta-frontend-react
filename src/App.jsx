@@ -23,21 +23,23 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Welcome />} />
-          <Route path="/profile" element={<PrivateRoute />}>
-            {/* to je outlet v private routu */}
-            <Route path="/profile" element={<Profile />} />
-          </Route>
-          <Route path="/foods" element={<PrivateRoute />}>
-            <Route path="/foods" element={<Foods />} />
-          </Route>
-          <Route path="/diary" element={<PrivateRoute />}>
-            <Route path="/diary" element={<Diary />} />
-          </Route>
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/register" element={<RegisterForm />} />
-        </Routes>
+        <div className="container mx-auto">
+          <Routes>
+            <Route path="/" element={<Welcome />} />
+            <Route path="/profile" element={<PrivateRoute />}>
+              {/* to je outlet v private routu */}
+              <Route path="/profile" element={<Profile />} />
+            </Route>
+            <Route path="/foods" element={<PrivateRoute />}>
+              <Route path="/foods" element={<Foods />} />
+            </Route>
+            <Route path="/diary" element={<PrivateRoute />}>
+              <Route path="/diary" element={<Diary />} />
+            </Route>
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/register" element={<RegisterForm />} />
+          </Routes>
+        </div>
       </BrowserRouter>
     </div>
   );
