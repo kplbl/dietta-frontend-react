@@ -8,7 +8,7 @@ const Navbar = () => {
   const { authenticated, logout, user } = userContext;
 
   return (
-    <nav className="bg-gray-500 flex items-center justify-between flex-wrap p-6">
+    <nav className="bg-gray-500 flex items-center justify-between flex-wrap p-6 mb-5">
       <div className="flex items-center flex-shrink-0 text-gray-800 mr-6">
         <svg
           xmlns="http://www.w3.org/2000/svg"

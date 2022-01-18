@@ -57,7 +57,7 @@ function Diary() {
         onClick={() => {
           navigate('/diary/add');
         }}
-        className="btn bg-blue-600 mt-4"
+        className="btn bg-blue-600"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
