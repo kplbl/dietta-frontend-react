@@ -22,7 +22,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Navbar />
-        <div className="container mx-auto">
+        <div className="container mx-auto px-4">
           <Routes>
             <Route path="/" element={<Welcome />} />
             <Route path="/profile" element={<PrivateRoute />}>
