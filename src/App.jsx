@@ -8,7 +8,6 @@ import LoginForm from './pages/user/LoginForm';
 import RegisterForm from './pages/user/RegisterForm';
 import { useEffect, useContext } from 'react';
 import UserContext from './context/user/UserContext';
-import useLocalStorage from './hooks/useLocalStorage';
 import PrivateRoute from './pages/PrivateRoute';
 
 function App() {
