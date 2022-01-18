@@ -4,7 +4,6 @@ import Food from './Food';
 import axios from 'axios';
 
 function Foods() {
-  const [selected, setSelected] = useState(null);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -32,7 +31,7 @@ function Foods() {
     try {
       setLoading(true);
       const res = await axios.post(`${BACKEND_URL}/foods`, newFood, config);
-      setData((prevState) => [...prevState, res.data]);
+      getFoods();
     } catch (err) {
       setError(err);
     } finally {
@@ -44,17 +43,11 @@ function Foods() {
     try {
       setLoading(true);
       const res = await axios.delete(`${BACKEND_URL}/foods/${id}`);
-      setData(data.filter((food) => food._id !== id));
+      getFoods();
     } catch (err) {
       setError(err);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const onRemove = () => {
-    if (selected !== null) {
-      removeFood(selected);
     }
   };
 
@@ -69,7 +62,7 @@ function Foods() {
   if (loading) return <h3>Loading...</h3>;
 
   return (
-    <div className="container mx-auto">
+    <>
       <AddFood addFood={addFood} getFoods={getFoods} />
       <table>
         <thead>
@@ -92,19 +85,13 @@ function Foods() {
               carb={data.carb}
               fat={data.fat}
               protein={data.protein}
-              selected={selected}
-              setSelected={setSelected}
+              removeFood={removeFood}
               id={data._id}
             />
           ))}
         </tbody>
       </table>
-      <div>
-        <button onClick={onRemove} className="btn bg-red-400 text-gray-100">
-          Remove
-        </button>
-      </div>
-    </div>
+    </>
   );
 }
 
