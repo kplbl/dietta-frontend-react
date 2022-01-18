@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Loading from '../../layout/Loading';
-import Entry from './Entry';
+
 import Targets from './Targets';
 import AddEntry from './AddEntry';
 import Entries from './Entries';
