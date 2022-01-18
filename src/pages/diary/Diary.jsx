@@ -85,13 +85,11 @@ function Diary() {
   if (error) return <h2>Error</h2>;
 
   return (
-    <div>
-      {foods && <AddEntry foods={foods} addEntry={addEntry} />}
-
-      <h3>Dnevnik</h3>
-      {entries && <Targets entries={entries} />}
-      {entries && <Entries entries={entries} deleteEntry={deleteEntry} />}
-    </div>
+    <>
+      {/* {foods && <AddEntry foods={foods} addEntry={addEntry} />} */}
+      <div className="my-5">{entries && <Targets entries={entries} />}</div>
+      <div>{entries && <Entries entries={entries} deleteEntry={deleteEntry} />}</div>
+    </>
   );
 }
 
