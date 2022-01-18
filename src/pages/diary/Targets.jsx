@@ -35,6 +35,7 @@ function Targets({ entries }) {
   };
 
   const calc_percentage = (a, b) => {
+    if (b === 0) return 0;
     const p = (a / b) * 100;
     if (p < 100) {
       return p;
@@ -48,46 +49,50 @@ function Targets({ entries }) {
       <div className="flex gap-x-5">
         <div className="w-36">Kalorije</div>
         <div className="w-full bg-gray-200 rounded h-5 dark:bg-gray-700 mr-5">
+          <div className="absolute">
+            {calc_calories(entries)} / {calorie_budget} kcal
+          </div>
           <div
             className="bg-blue-600 h-5 rounded"
             style={{ width: `${(calc_calories(entries) * 100) / calorie_budget}` + '%' }}
-          >
-            {calc_calories(entries)} / {calorie_budget} kcal
-          </div>
+          ></div>
         </div>
       </div>
 
       <div className="flex gap-x-5">
         <div className="w-36">Beljakovine</div>
         <div className="w-full bg-gray-200 rounded h-5 dark:bg-gray-700 mr-5">
+          <div className="absolute">
+            {calc_protein(entries)} / {protein_target} g
+          </div>
           <div
             className="bg-red-600 h-5 rounded"
             style={{ width: `${calc_percentage(calc_protein(entries), protein_target)}` + '%' }}
-          >
-            {calc_protein(entries)} / {protein_target} g
-          </div>
+          ></div>
         </div>
       </div>
       <div className="flex gap-x-5">
         <div className="w-36">Hidrati</div>
         <div className="w-full bg-gray-200 rounded h-5 dark:bg-gray-700 mr-5">
+          <div className="absolute">
+            {calc_carb(entries)} / {carbohydrate_target} g
+          </div>
           <div
             className="bg-yellow-600 h-5 rounded"
             style={{ width: `${calc_percentage(calc_carb(entries), carbohydrate_target)}` + '%' }}
-          >
-            {calc_carb(entries)} / {carbohydrate_target} g
-          </div>
+          ></div>
         </div>
       </div>
       <div className="flex gap-x-5">
         <div className="w-36">Maščobe</div>
         <div className="w-full bg-gray-200 rounded h-5 dark:bg-gray-700 mr-5">
+          <div className="absolute">
+            {calc_fats(entries)} / {fat_target} g
+          </div>
           <div
             className="bg-green-600 h-5 rounded"
             style={{ width: `${calc_percentage(calc_fats(entries), fat_target)}` + '%' }}
-          >
-            {calc_fats(entries)} / {fat_target} g
-          </div>
+          ></div>
         </div>
       </div>
     </div>
