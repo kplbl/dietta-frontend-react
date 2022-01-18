@@ -9,6 +9,7 @@ import RegisterForm from './pages/user/RegisterForm';
 import { useEffect, useContext } from 'react';
 import UserContext from './context/user/UserContext';
 import PrivateRoute from './pages/PrivateRoute';
+import AddEntry from './pages/diary/AddEntry';
 
 function App() {
   const userContext = useContext(UserContext);
@@ -34,6 +35,7 @@ function App() {
             </Route>
             <Route path="/diary" element={<PrivateRoute />}>
               <Route path="/diary" element={<Diary />} />
+              <Route path="/diary/add" element={<AddEntry />} />
             </Route>
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />

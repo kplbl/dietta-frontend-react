@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Loading from '../../layout/Loading';
+import { useNavigate } from 'react-router-dom';
 
 import Targets from './Targets';
 import AddEntry from './AddEntry';
@@ -11,7 +12,8 @@ function Diary() {
   const [foods, setFoods] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [selectedRow, setSelectedRow] = useState(false);
+
+  const navigate = useNavigate();
 
   const BACKEND_URL = 'http://127.0.0.1:5000/api';
 
@@ -21,41 +23,6 @@ function Diary() {
       const res = await axios.get(`${BACKEND_URL}/diary/today`);
 
       setEntries(res.data);
-    } catch (err) {
-      setError(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const getFoods = async () => {
-    try {
-      setLoading(true);
-      const res = await axios.get(`${BACKEND_URL}/foods/public`);
-      setFoods(res.data);
-    } catch (err) {
-      setError(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const addEntry = async (entry) => {
-    const config = {
-      headers: {
-        'Content-Type': 'Application/json',
-      },
-    };
-
-    try {
-      setLoading(true);
-      const res = await axios.post(`${BACKEND_URL}/diary`, entry, config);
-
-      // dont just put the returned entry into state, it doesn't
-      // contain the name and other data, just the id string of the food
-      // just get all entries, the data is added on the backend
-      //setEntries((prevState) => [...prevState, res.data]);
-      getEntries();
     } catch (err) {
       setError(err);
     } finally {
@@ -77,7 +44,6 @@ function Diary() {
 
   useEffect(() => {
     getEntries();
-    getFoods();
   }, []);
 
   if (loading) return <Loading />;
@@ -87,6 +53,22 @@ function Diary() {
   return (
     <>
       {/* {foods && <AddEntry foods={foods} addEntry={addEntry} />} */}
+      <button
+        onClick={() => {
+          navigate('/diary/add');
+        }}
+        className="btn bg-blue-600 mt-4"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 text-blue-200"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+        </svg>
+      </button>
       <div className="my-5">{entries && <Targets entries={entries} />}</div>
       <div>{entries && <Entries entries={entries} deleteEntry={deleteEntry} />}</div>
     </>

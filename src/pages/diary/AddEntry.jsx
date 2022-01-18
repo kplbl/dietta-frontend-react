@@ -1,10 +1,51 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import Loading from '../../layout/Loading';
 
-function AddEntry({ foods, addEntry }) {
+function AddEntry() {
   const [form, setForm] = useState({
     food: '',
     amount: 0,
   });
+  const [foods, setFoods] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
+
+  const BACKEND_URL = 'http://127.0.0.1:5000/api';
+
+  const getFoods = async () => {
+    try {
+      setLoading(true);
+      const res = await axios.get(`${BACKEND_URL}/foods/public`);
+      console.log(res.data);
+      setFoods(res.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const addEntry = async (entry) => {
+    const config = {
+      headers: {
+        'Content-Type': 'Application/json',
+      },
+    };
+
+    try {
+      setLoading(true);
+      const res = await axios.post(`${BACKEND_URL}/diary`, entry, config);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+      navigate('/diary');
+    }
+  };
+
   const onChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -17,6 +58,13 @@ function AddEntry({ foods, addEntry }) {
       amount: 0,
     });
   };
+
+  useEffect(() => {
+    getFoods();
+    console.log(foods);
+  }, [navigate]);
+
+  if (loading) return <Loading />;
 
   return (
     <div>
