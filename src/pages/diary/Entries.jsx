@@ -1,7 +1,6 @@
 import Entry from './Entry';
 
-function Entries({ entries, selectedRow, setSelectedRow }) {
-  console.log('test', entries);
+function Entries({ entries, deleteEntry }) {
   return (
     <table className="w-full md:w-1/2 table-auto">
       <thead>
@@ -19,8 +18,7 @@ function Entries({ entries, selectedRow, setSelectedRow }) {
             food={entry.food.name}
             kcal={entry.food.kcal}
             amount={entry.amount}
-            selectedRow={selectedRow}
-            setSelectedRow={setSelectedRow}
+            deleteEntry={deleteEntry}
             id={entry._id}
           />
         ))}
