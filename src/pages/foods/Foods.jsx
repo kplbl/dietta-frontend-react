@@ -64,7 +64,7 @@ function Foods() {
   return (
     <>
       <AddFood addFood={addFood} getFoods={getFoods} />
-      <table>
+      <table className="w-full md:w-1/2 table-auto">
         <thead>
           <tr>
             <th>Name</th>
