@@ -3,7 +3,7 @@ import UserContext from '../../context/user/UserContext';
 
 function Profile() {
     const userContext = useContext(UserContext);
-    const { updateProfile, user, authenticated, loading } = userContext;
+    const { updateProfile, user, loading } = userContext;
 
     //   const [form, setForm] = useState({
     //     username: '',
