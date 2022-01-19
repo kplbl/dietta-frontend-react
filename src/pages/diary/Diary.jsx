@@ -2,14 +2,11 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Loading from '../../layout/Loading';
 import { useNavigate } from 'react-router-dom';
-
 import Targets from './Targets';
-import AddEntry from './AddEntry';
 import Entries from './Entries';
 
 function Diary() {
     const [entries, setEntries] = useState(null);
-    const [foods, setFoods] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
 
