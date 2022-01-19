@@ -8,71 +8,76 @@ import AddEntry from './AddEntry';
 import Entries from './Entries';
 
 function Diary() {
-  const [entries, setEntries] = useState(null);
-  const [foods, setFoods] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+    const [entries, setEntries] = useState(null);
+    const [foods, setFoods] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const BACKEND_URL = 'http://127.0.0.1:5000/api';
+    const BACKEND_URL = 'http://127.0.0.1:5000/api';
 
-  const getEntries = async () => {
-    try {
-      setLoading(true);
-      const res = await axios.get(`${BACKEND_URL}/diary/today`);
+    const getEntries = async () => {
+        try {
+            setLoading(true);
+            const res = await axios.get(`${BACKEND_URL}/diary/today`);
 
-      setEntries(res.data);
-    } catch (err) {
-      setError(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+            setEntries(res.data);
+        } catch (err) {
+            setError(err);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-  const deleteEntry = async (id) => {
-    try {
-      setLoading(true);
-      const res = await axios.delete(`${BACKEND_URL}/diary/${id}`);
-      getEntries();
-    } catch (err) {
-      setError(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+    const deleteEntry = async (id) => {
+        try {
+            setLoading(true);
+            const res = await axios.delete(`${BACKEND_URL}/diary/${id}`);
+            getEntries();
+        } catch (err) {
+            setError(err);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-  useEffect(() => {
-    getEntries();
-  }, []);
+    useEffect(() => {
+        getEntries();
+    }, []);
 
-  if (loading) return <Loading />;
+    if (loading) return <Loading />;
 
-  if (error) return <h2>Error</h2>;
+    if (error) return <h2>Error</h2>;
 
-  return (
-    <>
-      {/* {foods && <AddEntry foods={foods} addEntry={addEntry} />} */}
-      <button
-        onClick={() => {
-          navigate('/diary/add');
-        }}
-        className="btn bg-blue-600"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 text-blue-200"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-        </svg>
-      </button>
-      <div className="my-5">{entries && <Targets entries={entries} />}</div>
-      <div>{entries && <Entries entries={entries} deleteEntry={deleteEntry} />}</div>
-    </>
-  );
+    return (
+        <>
+            {/* {foods && <AddEntry foods={foods} addEntry={addEntry} />} */}
+            <button
+                onClick={() => {
+                    navigate('/diary/add');
+                }}
+                className="btn bg-blue-600"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-blue-200"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 4v16m8-8H4"
+                    />
+                </svg>
+            </button>
+            <div className="my-5">{entries && <Targets entries={entries} />}</div>
+            <div>{entries && <Entries entries={entries} deleteEntry={deleteEntry} />}</div>
+        </>
+    );
 }
 
 export default Diary;

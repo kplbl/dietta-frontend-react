@@ -12,38 +12,38 @@ import PrivateRoute from './pages/PrivateRoute';
 import AddEntry from './pages/diary/AddEntry';
 
 function App() {
-  const userContext = useContext(UserContext);
-  const { loadUser } = userContext;
+    const userContext = useContext(UserContext);
+    const { loadUser } = userContext;
 
-  useEffect(() => {
-    loadUser();
-  }, []);
+    useEffect(() => {
+        loadUser();
+    }, []);
 
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Navbar />
-        <div className="container mx-auto px-4">
-          <Routes>
-            <Route path="/" element={<Welcome />} />
-            <Route path="/profile" element={<PrivateRoute />}>
-              {/* to je outlet v private routu */}
-              <Route path="/profile" element={<Profile />} />
-            </Route>
-            <Route path="/foods" element={<PrivateRoute />}>
-              <Route path="/foods" element={<Foods />} />
-            </Route>
-            <Route path="/diary" element={<PrivateRoute />}>
-              <Route path="/diary" element={<Diary />} />
-              <Route path="/diary/add" element={<AddEntry />} />
-            </Route>
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/register" element={<RegisterForm />} />
-          </Routes>
+    return (
+        <div className="App">
+            <BrowserRouter>
+                <Navbar />
+                <div className="container mx-auto px-4">
+                    <Routes>
+                        <Route path="/" element={<Welcome />} />
+                        <Route path="/profile" element={<PrivateRoute />}>
+                            {/* to je outlet v private routu */}
+                            <Route path="/profile" element={<Profile />} />
+                        </Route>
+                        <Route path="/foods" element={<PrivateRoute />}>
+                            <Route path="/foods" element={<Foods />} />
+                        </Route>
+                        <Route path="/diary" element={<PrivateRoute />}>
+                            <Route path="/diary" element={<Diary />} />
+                            <Route path="/diary/add" element={<AddEntry />} />
+                        </Route>
+                        <Route path="/login" element={<LoginForm />} />
+                        <Route path="/register" element={<RegisterForm />} />
+                    </Routes>
+                </div>
+            </BrowserRouter>
         </div>
-      </BrowserRouter>
-    </div>
-  );
+    );
 }
 
 export default App;
