@@ -30,6 +30,7 @@ function Foods() {
         };
         try {
             setLoading(true);
+            // eslint-disable-next-line no-unused-vars
             const res = await axios.post(`${BACKEND_URL}/foods`, newFood, config);
             getFoods();
         } catch (err) {
@@ -42,6 +43,7 @@ function Foods() {
     const removeFood = async (id) => {
         try {
             setLoading(true);
+            // eslint-disable-next-line no-unused-vars
             const res = await axios.delete(`${BACKEND_URL}/foods/${id}`);
             getFoods();
         } catch (err) {
