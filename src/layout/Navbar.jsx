@@ -54,12 +54,18 @@ const Navbar = () => {
           <div>
             <Link
               to="/diary"
+              onClick={() => {
+                setOpen(false);
+              }}
               className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600 mr-2"
             >
               Dnevnik
             </Link>
             <Link
               to="/profile"
+              onClick={() => {
+                setOpen(false);
+              }}
               className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600 mr-2"
             >
               Profil
@@ -67,6 +73,9 @@ const Navbar = () => {
 
             <Link
               to="/foods"
+              onClick={() => {
+                setOpen(false);
+              }}
               className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600 mr-2"
             >
               Hrana
