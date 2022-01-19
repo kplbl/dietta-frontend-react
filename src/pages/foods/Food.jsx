@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Food = ({ name, description, kcal, carb, fat, protein, id, removeFood }) => {
     const onClick = (e) => {
         e.preventDefault();
