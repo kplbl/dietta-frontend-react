@@ -13,7 +13,7 @@ function AddEntry() {
 
     const navigate = useNavigate();
 
-    const BACKEND_URL = 'http://127.0.0.1:5000/api';
+    const BACKEND_URL = import.meta.env.VITE_API_URL;
 
     const getFoods = async () => {
         try {
@@ -37,6 +37,7 @@ function AddEntry() {
 
         try {
             setLoading(true);
+            // eslint-disable-next-line no-unused-vars
             const res = await axios.post(`${BACKEND_URL}/diary`, entry, config);
         } catch (err) {
             console.log(err);

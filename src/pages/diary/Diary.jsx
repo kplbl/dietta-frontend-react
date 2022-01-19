@@ -12,7 +12,7 @@ function Diary() {
 
     const navigate = useNavigate();
 
-    const BACKEND_URL = 'http://127.0.0.1:5000/api';
+    const BACKEND_URL = import.meta.env.VITE_API_URL;
 
     const getEntries = async () => {
         try {
@@ -30,6 +30,7 @@ function Diary() {
     const deleteEntry = async (id) => {
         try {
             setLoading(true);
+            // eslint-disable-next-line no-unused-vars
             const res = await axios.delete(`${BACKEND_URL}/diary/${id}`);
             getEntries();
         } catch (err) {
