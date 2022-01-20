@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const AddFood = ({ addFood, getFoods }) => {
+const AddFood = () => {
     const [form, setForm] = useState({
         name: '',
         description: '',
@@ -11,15 +13,32 @@ const AddFood = ({ addFood, getFoods }) => {
         is_public: true,
     });
 
+    const navigate = useNavigate();
+
+    const BACKEND_URL = import.meta.env.VITE_API_URL;
+
+    const addFood = async (newFood) => {
+        const config = {
+            headers: {
+                'Content-Type': 'Application/json',
+            },
+        };
+        try {
+            // eslint-disable-next-line no-unused-vars
+            const res = await axios.post(`${BACKEND_URL}/foods`, newFood, config);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     const onChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
     const onSubmit = (e) => {
         e.preventDefault();
+        console.log(form);
         addFood(form);
-        getFoods();
-
         setForm({
             name: '',
             description: '',
@@ -29,12 +48,13 @@ const AddFood = ({ addFood, getFoods }) => {
             protein: 0,
             is_public: true,
         });
+        navigate('/foods');
     };
 
     return (
         <form onSubmit={onSubmit}>
             <div>
-                <label>Ime</label>
+                <label>Name</label>
                 <input
                     className="inputbox"
                     type="text"
@@ -44,7 +64,7 @@ const AddFood = ({ addFood, getFoods }) => {
                 />
             </div>
             <div>
-                <label>Opis</label>
+                <label>Description</label>
                 <input
                     className="inputbox"
                     type="text"
@@ -64,7 +84,7 @@ const AddFood = ({ addFood, getFoods }) => {
                 />
             </div>
             <div>
-                <label>Hidrati</label>
+                <label>Carbohydrates</label>
                 <input
                     className="inputbox"
                     type="number"
@@ -74,7 +94,7 @@ const AddFood = ({ addFood, getFoods }) => {
                 />
             </div>
             <div>
-                <label>Maščoba</label>
+                <label>Fat</label>
                 <input
                     className="inputbox"
                     type="number"
@@ -84,7 +104,7 @@ const AddFood = ({ addFood, getFoods }) => {
                 />
             </div>
             <div>
-                <label>Beljakovine</label>
+                <label>Protein</label>
                 <input
                     className="inputbox"
                     type="number"
@@ -102,7 +122,10 @@ const AddFood = ({ addFood, getFoods }) => {
                     onChange={onChange}
                 />
             </div>
-            <input className="btn btn-primary" type="submit" value="Dodaj" />
+            <div className="flex justify-between">
+                <input className="btn btn-primary" type="submit" value="Add" />
+                <input className="btn bg-red-400" type="submit" value="Cancel" />
+            </div>
         </form>
     );
 };
