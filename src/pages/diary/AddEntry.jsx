@@ -19,16 +19,15 @@ function AddEntry() {
         try {
             setLoading(true);
             const res = await axios.get(`${BACKEND_URL}/foods/public`);
-            console.log(res.data);
+
             setFoods(res.data);
+            setLoading(false);
         } catch (error) {
             console.log(error);
-        } finally {
-            setLoading(false);
         }
     };
 
-    const addEntry = async (entry) => {
+    const addEntry = async (form) => {
         const config = {
             headers: {
                 'Content-Type': 'Application/json',
@@ -36,24 +35,27 @@ function AddEntry() {
         };
 
         try {
-            setLoading(true);
             // eslint-disable-next-line no-unused-vars
-            const res = await axios.post(`${BACKEND_URL}/diary`, entry, config);
+            const res = await axios.post(`${BACKEND_URL}/diary`, form, config);
         } catch (err) {
             console.log(err);
         } finally {
-            setLoading(false);
             navigate('/diary');
         }
     };
 
     const onChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
+        e.preventDefault();
+        setForm((prevState) => {
+            return { ...prevState, [e.target.name]: e.target.value };
+        });
     };
 
     const onSubmit = (e) => {
         e.preventDefault();
+
         addEntry(form);
+
         setForm({
             food: '',
             amount: 0,
@@ -62,10 +64,11 @@ function AddEntry() {
 
     useEffect(() => {
         getFoods();
-        console.log(foods);
-    }, [navigate]);
+    }, []);
 
-    if (loading) return <Loading />;
+    if (loading) {
+        return <Loading />;
+    }
 
     return (
         <div>
