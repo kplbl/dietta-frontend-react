@@ -8,8 +8,8 @@ const Navbar = () => {
     const { authenticated, logout, user } = userContext;
 
     return (
-        <nav className="bg-gray-500 flex items-center justify-between flex-wrap p-6 mb-5">
-            <div className="flex items-center flex-shrink-0 text-gray-800 mr-6">
+        <nav className="bg-slate-100 shadow flex items-center justify-between flex-wrap px-5 py-2 mb-5">
+            <div className="flex items-center flex-shrink-0 text-slate-600 mr-6">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
@@ -29,7 +29,7 @@ const Navbar = () => {
 
             <div className="block md:hidden">
                 <button
-                    className="flex items-center px-3 py-2 border rounded text-gray-800 border-gray-600 hover:text-gray-600 hover:border-gray-400"
+                    className="flex items-center px-3 py-2 border rounded text-slate-600 border-gray-600 hover:text-gray-600 hover:border-black"
                     onClick={() => setOpen(!open)}
                 >
                     <svg
@@ -59,7 +59,7 @@ const Navbar = () => {
                             onClick={() => {
                                 setOpen(false);
                             }}
-                            className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-2"
+                            className="block text-lg mt-4 md:inline-block md:mt-0 text-slate-600 hover:text-slate-800 mr-2"
                         >
                             Diary
                         </Link>
@@ -68,7 +68,7 @@ const Navbar = () => {
                             onClick={() => {
                                 setOpen(false);
                             }}
-                            className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-2"
+                            className="block text-lg mt-4 md:inline-block md:mt-0 text-slate-600 hover:text-slate-800 mr-2"
                         >
                             Profile
                         </Link>
@@ -78,7 +78,7 @@ const Navbar = () => {
                             onClick={() => {
                                 setOpen(false);
                             }}
-                            className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-2"
+                            className="block text-lg mt-4 md:inline-block md:mt-0 text-slate-600 hover:text-slate-800 mr-2"
                         >
                             Food
                         </Link>
@@ -88,14 +88,14 @@ const Navbar = () => {
                         {authenticated ? (
                             <button
                                 onClick={logout}
-                                className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600"
+                                className="block text-lg mt-4 md:inline-block md:mt-0 text-slate-600 hover:text-slate-800"
                             >
                                 {user?.username} | Logout
                             </button>
                         ) : (
                             <Link
                                 to="/login"
-                                className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-2"
+                                className="block mt-4 text-lg md:inline-block md:mt-0 text-slate-600 hover:text-slate-800 mr-2"
                             >
                                 Login
                             </Link>
