@@ -66,7 +66,7 @@ function Diary() {
         getEntries();
     }, [date]);
 
-    if (loading) return <Loading />;
+    if (loading && !entries) return <Loading />;
 
     if (error) return <h2>Error</h2>;
 
@@ -135,7 +135,7 @@ function Diary() {
 
             <div className="my-5">
                 {entries.length !== 0 ? (
-                    <div>
+                    <div className="flex flex-col gap-5">
                         <Targets entries={entries} />
                         <Entries entries={entries} deleteEntry={deleteEntry} />
                     </div>
