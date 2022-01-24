@@ -77,7 +77,7 @@ function Diary() {
                     onClick={() => {
                         navigate('/diary/add');
                     }}
-                    className="btn bg-gray-100 border-2 border-gray-300"
+                    className="btn bg-gray-100 border-2 border-gray-300 hover:shadow"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
