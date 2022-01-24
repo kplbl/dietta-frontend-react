@@ -45,15 +45,15 @@ function Targets({ entries }) {
     };
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-2">
             <div className="flex gap-x-5">
                 <div className="w-36">Kalorije</div>
-                <div className="w-full bg-gray-200 rounded h-5 dark:bg-gray-700 ">
-                    <div className="absolute">
+                <div className="w-full bg-blue-50 rounded h-6">
+                    <div className="absolute text-blue-800 ml-2 ">
                         {calc_calories(entries)} / {calorie_budget} kcal
                     </div>
                     <div
-                        className="bg-blue-600 h-5 rounded"
+                        className="bg-blue-400 h-6 rounded"
                         style={{
                             width: `${(calc_calories(entries) * 100) / calorie_budget}` + '%',
                         }}
@@ -63,12 +63,12 @@ function Targets({ entries }) {
 
             <div className="flex gap-x-5">
                 <div className="w-36">Beljakovine</div>
-                <div className="w-full bg-gray-200 rounded h-5 dark:bg-gray-700 ">
-                    <div className="absolute">
+                <div className="w-full bg-red-50 rounded h-6">
+                    <div className="absolute text-red-800 ml-2 ">
                         {calc_protein(entries)} / {protein_target} g
                     </div>
                     <div
-                        className="bg-red-600 h-5 rounded"
+                        className="bg-red-400 h-6 rounded"
                         style={{
                             width:
                                 `${calc_percentage(calc_protein(entries), protein_target)}` + '%',
@@ -78,12 +78,12 @@ function Targets({ entries }) {
             </div>
             <div className="flex gap-x-5">
                 <div className="w-36">Hidrati</div>
-                <div className="w-full bg-gray-200 rounded h-5 dark:bg-gray-700 ">
-                    <div className="absolute">
+                <div className="w-full bg-yellow-50 rounded h-6">
+                    <div className="absolute text-yellow-800 ml-2 ">
                         {calc_carb(entries)} / {carbohydrate_target} g
                     </div>
                     <div
-                        className="bg-yellow-600 h-5 rounded"
+                        className="bg-yellow-400 h-6 rounded"
                         style={{
                             width:
                                 `${calc_percentage(calc_carb(entries), carbohydrate_target)}` + '%',
@@ -93,12 +93,12 @@ function Targets({ entries }) {
             </div>
             <div className="flex gap-x-5">
                 <div className="w-36">Maščobe</div>
-                <div className="w-full bg-gray-200 rounded h-5 dark:bg-gray-700 ">
-                    <div className="absolute">
+                <div className="w-full bg-green-50 rounded h-6">
+                    <div className="absolute text-green-800 ml-2">
                         {calc_fats(entries)} / {fat_target} g
                     </div>
                     <div
-                        className="bg-green-600 h-5 rounded"
+                        className="bg-green-400 h-6 rounded"
                         style={{
                             width: `${calc_percentage(calc_fats(entries), fat_target)}` + '%',
                         }}
