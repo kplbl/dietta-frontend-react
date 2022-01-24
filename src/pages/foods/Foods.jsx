@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Food from './Food';
 import axios from 'axios';
+import Loading from '../../layout/Loading';
 
 function Foods() {
     const [data, setData] = useState(null);
@@ -41,11 +42,11 @@ function Foods() {
         getFoods();
     }, [navigate]);
 
-    if (!data) return <h3>No data</h3>;
-
     if (error) return <h3>{error}</h3>;
 
-    if (loading) return <h3>Loading...</h3>;
+    if (loading && !data) return <Loading />;
+
+    if (!data) return <h3>No data</h3>;
 
     return (
         <>
