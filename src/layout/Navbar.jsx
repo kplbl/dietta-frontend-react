@@ -61,7 +61,7 @@ const Navbar = () => {
                             }}
                             className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600 mr-2"
                         >
-                            Dnevnik
+                            Diary
                         </Link>
                         <Link
                             to="/profile"
@@ -70,7 +70,7 @@ const Navbar = () => {
                             }}
                             className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600 mr-2"
                         >
-                            Profil
+                            Profile
                         </Link>
 
                         <Link
@@ -80,7 +80,7 @@ const Navbar = () => {
                             }}
                             className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600 mr-2"
                         >
-                            Hrana
+                            Food
                         </Link>
                     </div>
 
@@ -90,14 +90,14 @@ const Navbar = () => {
                                 onClick={logout}
                                 className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600"
                             >
-                                {user?.username} | Odjava
+                                {user?.username} | Logout
                             </button>
                         ) : (
                             <Link
                                 to="/login"
                                 className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600 mr-2"
                             >
-                                Prijava
+                                Login
                             </Link>
                         )}
                     </div>
