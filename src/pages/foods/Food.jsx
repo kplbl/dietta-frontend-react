@@ -16,7 +16,7 @@ const Food = ({ name, description, kcal, carb, fat, protein, id, removeFood }) =
                 <svg
                     onClick={onClick}
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 hover:text-red-700"
+                    className="h-5 w-5 hover:text-red-700"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"

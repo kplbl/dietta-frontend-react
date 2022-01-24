@@ -77,11 +77,11 @@ function Diary() {
                     onClick={() => {
                         navigate('/diary/add');
                     }}
-                    className="btn bg-blue-600"
+                    className="btn bg-gray-100 border-2 border-gray-300"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 text-blue-200"
+                        className="h-6 w-6 text-gray-500"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"

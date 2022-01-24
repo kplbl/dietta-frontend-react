@@ -49,17 +49,17 @@ function Foods() {
     if (!data) return <h3>No data</h3>;
 
     return (
-        <>
+        <div className="flex flex-col gap-5">
             <div>
                 <button
                     onClick={() => {
                         navigate('/foods/add');
                     }}
-                    className="btn bg-blue-600"
+                    className="btn bg-gray-100 border-2 border-gray-300"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 text-blue-200"
+                        className="h-6 w-6 text-gray-600"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -73,8 +73,8 @@ function Foods() {
                     </svg>
                 </button>
             </div>
-            <table className="w-full md:w-1/2 table-auto">
-                <thead>
+            <table className="w-full table-auto self-center">
+                <thead className="text-left">
                     <tr>
                         <th>Name</th>
                         <th>Description</th>
@@ -100,7 +100,7 @@ function Foods() {
                     ))}
                 </tbody>
             </table>
-        </>
+        </div>
     );
 }
 

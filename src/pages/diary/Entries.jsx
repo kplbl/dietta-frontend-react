@@ -2,7 +2,7 @@ import Entry from './Entry';
 
 function Entries({ entries, deleteEntry }) {
     return (
-        <table className="w-full md:w-1/2 table-auto">
+        <table className="w-full md:w-1/2 table-auto self-center">
             <thead>
                 <tr>
                     <th className="text-left">Food</th>
