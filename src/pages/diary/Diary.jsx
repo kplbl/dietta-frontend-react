@@ -72,7 +72,7 @@ function Diary() {
 
     return (
         <>
-            <div className="flex justify-between">
+            <div className="flex justify-between md:w-4/5 mx-auto">
                 <button
                     onClick={() => {
                         navigate('/diary/add');
@@ -135,7 +135,7 @@ function Diary() {
 
             <div className="my-5">
                 {entries.length !== 0 ? (
-                    <div className="flex flex-col gap-5">
+                    <div className="flex flex-col gap-5 md:w-4/5 mx-auto">
                         <Targets entries={entries} />
                         <Entries entries={entries} deleteEntry={deleteEntry} />
                     </div>

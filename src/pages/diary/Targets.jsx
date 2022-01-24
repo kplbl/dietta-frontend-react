@@ -45,7 +45,7 @@ function Targets({ entries }) {
     };
 
     return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 ">
             <div className="flex gap-x-5">
                 <div className="w-36">Calories</div>
                 <div className="w-full bg-blue-50 rounded h-6">
