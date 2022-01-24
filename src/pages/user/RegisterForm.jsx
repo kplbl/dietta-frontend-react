@@ -46,6 +46,13 @@ const RegisterForm = () => {
                 </div>
                 <div className="flex justify-between">
                     <button className="btn btn-primary">Register</button>
+                    <button
+                        type="button"
+                        onClick={() => navigate('/login')}
+                        className="btn btn-primary"
+                    >
+                        Back
+                    </button>
                 </div>
             </form>
         </div>
