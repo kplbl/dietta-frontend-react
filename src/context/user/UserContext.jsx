@@ -4,7 +4,7 @@ import userReducer from './UserReducer';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import setAxiosToken from '../../setAxiosToken';
 
-const BACKEND_URL = 'http://127.0.0.1:5000/api';
+const BACKEND_URL = import.meta.env.VITE_API_URL;
 
 const UserContext = createContext();
 
