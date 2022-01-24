@@ -27,7 +27,7 @@ const Navbar = () => {
                 <span className="font-semibold text-xl tracking-tight">Dietta</span>
             </div>
 
-            <div className="block lg:hidden">
+            <div className="block md:hidden">
                 <button
                     className="flex items-center px-3 py-2 border rounded text-gray-800 border-gray-600 hover:text-gray-600 hover:border-gray-400"
                     onClick={() => setOpen(!open)}
@@ -59,7 +59,7 @@ const Navbar = () => {
                             onClick={() => {
                                 setOpen(false);
                             }}
-                            className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600 mr-2"
+                            className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-2"
                         >
                             Diary
                         </Link>
@@ -68,7 +68,7 @@ const Navbar = () => {
                             onClick={() => {
                                 setOpen(false);
                             }}
-                            className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600 mr-2"
+                            className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-2"
                         >
                             Profile
                         </Link>
@@ -78,7 +78,7 @@ const Navbar = () => {
                             onClick={() => {
                                 setOpen(false);
                             }}
-                            className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600 mr-2"
+                            className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-2"
                         >
                             Food
                         </Link>
@@ -88,14 +88,14 @@ const Navbar = () => {
                         {authenticated ? (
                             <button
                                 onClick={logout}
-                                className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600"
+                                className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600"
                             >
                                 {user?.username} | Logout
                             </button>
                         ) : (
                             <Link
                                 to="/login"
-                                className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-600 mr-2"
+                                className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-2"
                             >
                                 Login
                             </Link>
