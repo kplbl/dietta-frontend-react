@@ -10,6 +10,7 @@ import { useEffect, useContext } from 'react';
 import UserContext from './context/user/UserContext';
 import PrivateRoute from './pages/PrivateRoute';
 import AddEntry from './pages/diary/AddEntry';
+import AddFood from './pages/foods/AddFood';
 
 function App() {
     const userContext = useContext(UserContext);
@@ -32,6 +33,7 @@ function App() {
                         </Route>
                         <Route path="/foods" element={<PrivateRoute />}>
                             <Route path="/foods" element={<Foods />} />
+                            <Route path="/foods/add" element={<AddFood />} />
                         </Route>
                         <Route path="/diary" element={<PrivateRoute />}>
                             <Route path="/diary" element={<Diary />} />

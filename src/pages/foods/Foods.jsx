@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import AddFood from './AddFood';
+import { useNavigate } from 'react-router-dom';
 import Food from './Food';
 import axios from 'axios';
 
@@ -8,6 +8,8 @@ function Foods() {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
+    const navigate = useNavigate();
+
     const BACKEND_URL = import.meta.env.VITE_API_URL;
 
     const getFoods = async () => {
@@ -15,24 +17,6 @@ function Foods() {
             setLoading(true);
             const res = await axios.get(`${BACKEND_URL}/foods/public`);
             setData(res.data);
-        } catch (err) {
-            setError(err);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const addFood = async (newFood) => {
-        const config = {
-            headers: {
-                'Content-Type': 'Application/json',
-            },
-        };
-        try {
-            setLoading(true);
-            // eslint-disable-next-line no-unused-vars
-            const res = await axios.post(`${BACKEND_URL}/foods`, newFood, config);
-            getFoods();
         } catch (err) {
             setError(err);
         } finally {
@@ -55,7 +39,7 @@ function Foods() {
 
     useEffect(() => {
         getFoods();
-    }, []);
+    }, [navigate]);
 
     if (!data) return <h3>No data</h3>;
 
@@ -65,7 +49,29 @@ function Foods() {
 
     return (
         <>
-            <AddFood addFood={addFood} getFoods={getFoods} />
+            <div>
+                <button
+                    onClick={() => {
+                        navigate('/foods/add');
+                    }}
+                    className="btn bg-blue-600"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 text-blue-200"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 4v16m8-8H4"
+                        />
+                    </svg>
+                </button>
+            </div>
             <table className="w-full md:w-1/2 table-auto">
                 <thead>
                     <tr>
