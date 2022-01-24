@@ -29,11 +29,11 @@ const LoginForm = () => {
         <div className="w-96">
             <form onSubmit={onSubmit} className="bg-white rounded px-8 pt-6 pb-8 mb-4 space-y-6">
                 <div className="">
-                    <label className="block text-sm text-gray-500">Uporabniško ime</label>
+                    <label className="block text-sm text-gray-500">Username</label>
                     <input className="inputbox" type="text" name="username" onChange={onChange} />
                 </div>
                 <div>
-                    <label className="block text-sm text-gray-500">Geslo</label>
+                    <label className="block text-sm text-gray-500">Password</label>
                     <input
                         className="inputbox"
                         type="password"
@@ -42,9 +42,9 @@ const LoginForm = () => {
                     />
                 </div>
                 <div className="flex justify-between">
-                    <button className="btn btn-primary">Prijavi se</button>
+                    <button className="btn btn-primary">Log in</button>
                     <Link to="/register" className="btn btn-primary">
-                        Registriraj se
+                        Register
                     </Link>
                 </div>
             </form>
