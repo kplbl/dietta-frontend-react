@@ -1,42 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import FoodContext from '../../context/food/FoodContext';
 import Food from './Food';
-import axios from 'axios';
+
 import Loading from '../../layout/Loading';
 
 function Foods() {
-    const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const foodContext = useContext(FoodContext);
+
+    const { getFoods, removeFood, foods, loading, error } = foodContext;
 
     const navigate = useNavigate();
-
-    const BACKEND_URL = import.meta.env.VITE_API_URL;
-
-    const getFoods = async () => {
-        try {
-            setLoading(true);
-            const res = await axios.get(`${BACKEND_URL}/foods/public`);
-            setData(res.data);
-        } catch (err) {
-            setError(err);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const removeFood = async (id) => {
-        try {
-            setLoading(true);
-            // eslint-disable-next-line no-unused-vars
-            const res = await axios.delete(`${BACKEND_URL}/foods/${id}`);
-            getFoods();
-        } catch (err) {
-            setError(err);
-        } finally {
-            setLoading(false);
-        }
-    };
 
     useEffect(() => {
         getFoods();
@@ -44,9 +18,9 @@ function Foods() {
 
     if (error) return <h3>{error}</h3>;
 
-    if (loading && !data) return <Loading />;
+    if (loading && !foods) return <Loading />;
 
-    if (!data) return <h3>No data</h3>;
+    if (!foods) return <h3>No data</h3>;
 
     return (
         <div className="flex flex-col gap-5">
@@ -85,17 +59,17 @@ function Foods() {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((data) => (
+                    {foods.map((food) => (
                         <Food
-                            key={data._id}
-                            name={data.name}
-                            description={data.description}
-                            kcal={data.kcal}
-                            carb={data.carb}
-                            fat={data.fat}
-                            protein={data.protein}
+                            key={food._id}
+                            name={food.name}
+                            description={food.description}
+                            kcal={food.kcal}
+                            carb={food.carb}
+                            fat={food.fat}
+                            protein={food.protein}
                             removeFood={removeFood}
-                            id={data._id}
+                            id={food._id}
                         />
                     ))}
                 </tbody>

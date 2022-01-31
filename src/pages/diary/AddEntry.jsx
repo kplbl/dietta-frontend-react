@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import FoodContext from '../../context/food/FoodContext';
 import axios from 'axios';
 import Loading from '../../layout/Loading';
 
@@ -8,24 +9,14 @@ function AddEntry() {
         food: '',
         amount: 0,
     });
-    const [foods, setFoods] = useState(null);
-    const [loading, setLoading] = useState(true);
-
-    const navigate = useNavigate();
 
     const BACKEND_URL = import.meta.env.VITE_API_URL;
 
-    const getFoods = async () => {
-        try {
-            setLoading(true);
-            const res = await axios.get(`${BACKEND_URL}/foods/public`);
+    const foodContext = useContext(FoodContext);
 
-            setFoods(res.data);
-            setLoading(false);
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    const { foods, loading } = foodContext;
+
+    const navigate = useNavigate();
 
     const addEntry = async (form) => {
         const config = {
@@ -61,10 +52,6 @@ function AddEntry() {
             amount: 0,
         });
     };
-
-    useEffect(() => {
-        getFoods();
-    }, []);
 
     if (loading) {
         return <Loading />;
