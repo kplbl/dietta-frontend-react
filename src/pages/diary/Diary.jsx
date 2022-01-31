@@ -1,66 +1,19 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
+import DiaryContext from '../../context/diary/DiaryContext';
 import Loading from '../../layout/Loading';
 import { useNavigate } from 'react-router-dom';
 import Targets from './Targets';
 import Entries from './Entries';
 import NoEntries from './NoEntries';
 import format from 'date-fns/format';
-import subDays from 'date-fns/subDays';
-import addDays from 'date-fns/addDays';
-import isToday from 'date-fns/isToday';
-import formatISO from 'date-fns/formatISO';
 
 function Diary() {
-    const [entries, setEntries] = useState(null);
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [date, setDate] = useState(new Date());
+    const diaryContext = useContext(DiaryContext);
+
+    const { getEntries, deleteEntry, prevDay, nextDay, entries, loading, error, date } =
+        diaryContext;
 
     const navigate = useNavigate();
-
-    const BACKEND_URL = import.meta.env.VITE_API_URL;
-
-    const prevDay = () => {
-        setDate(subDays(date, 1));
-    };
-
-    const nextDay = () => {
-        if (!isToday(date)) {
-            setDate(addDays(date, 1));
-        }
-    };
-
-    const getEntries = async () => {
-        try {
-            setLoading(true);
-            const res = await axios.get(`${BACKEND_URL}/diary/day/${formatISO(date)}`);
-            const parsed = res.data.map((entry) => {
-                return {
-                    ...entry,
-                    food: JSON.parse(entry.food),
-                };
-            });
-            setEntries(parsed);
-        } catch (err) {
-            setError(err);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const deleteEntry = async (id) => {
-        try {
-            setLoading(true);
-            // eslint-disable-next-line no-unused-vars
-            const res = await axios.delete(`${BACKEND_URL}/diary/${id}`);
-            getEntries();
-        } catch (err) {
-            setError(err);
-        } finally {
-            setLoading(false);
-        }
-    };
 
     useEffect(() => {
         getEntries();

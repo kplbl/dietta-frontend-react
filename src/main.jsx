@@ -4,12 +4,15 @@ import './index.css';
 import App from './App';
 import { UserProvider } from './context/user/UserContext';
 import { FoodProvider } from './context/food/FoodContext';
+import { DiaryProvider } from './context/diary/DiaryContext';
 
 ReactDOM.render(
     <React.StrictMode>
         <UserProvider>
             <FoodProvider>
-                <App />
+                <DiaryProvider>
+                    <App />
+                </DiaryProvider>
             </FoodProvider>
         </UserProvider>
     </React.StrictMode>,

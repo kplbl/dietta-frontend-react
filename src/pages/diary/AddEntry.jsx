@@ -1,7 +1,8 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FoodContext from '../../context/food/FoodContext';
-import axios from 'axios';
+import DiaryContext from '../../context/diary/DiaryContext';
+
 import Loading from '../../layout/Loading';
 
 function AddEntry() {
@@ -10,30 +11,13 @@ function AddEntry() {
         amount: 0,
     });
 
-    const BACKEND_URL = import.meta.env.VITE_API_URL;
-
     const foodContext = useContext(FoodContext);
+    const diaryContext = useContext(DiaryContext);
 
     const { foods, loading } = foodContext;
+    const { addEntry } = diaryContext;
 
     const navigate = useNavigate();
-
-    const addEntry = async (form) => {
-        const config = {
-            headers: {
-                'Content-Type': 'Application/json',
-            },
-        };
-
-        try {
-            // eslint-disable-next-line no-unused-vars
-            const res = await axios.post(`${BACKEND_URL}/diary`, form, config);
-        } catch (err) {
-            console.log(err);
-        } finally {
-            navigate('/diary');
-        }
-    };
 
     const onChange = (e) => {
         e.preventDefault();
@@ -44,16 +28,15 @@ function AddEntry() {
 
     const onSubmit = (e) => {
         e.preventDefault();
-
         addEntry(form);
-
         setForm({
             food: '',
             amount: 0,
         });
+        navigate('/diary');
     };
 
-    if (loading) {
+    if (loading && !foods) {
         return <Loading />;
     }
 
