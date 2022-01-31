@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import axios from 'axios';
+import { useState, useContext } from 'react';
+import FoodContext from '../../context/food/FoodContext';
 import { useNavigate } from 'react-router-dom';
 
 const AddFood = () => {
@@ -13,23 +13,11 @@ const AddFood = () => {
         is_public: true,
     });
 
+    const foodContext = useContext(FoodContext);
+
+    const { addFood } = foodContext;
+
     const navigate = useNavigate();
-
-    const BACKEND_URL = import.meta.env.VITE_API_URL;
-
-    const addFood = async (newFood) => {
-        const config = {
-            headers: {
-                'Content-Type': 'Application/json',
-            },
-        };
-        try {
-            // eslint-disable-next-line no-unused-vars
-            const res = await axios.post(`${BACKEND_URL}/foods`, newFood, config);
-        } catch (err) {
-            console.log(err);
-        }
-    };
 
     const onChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
