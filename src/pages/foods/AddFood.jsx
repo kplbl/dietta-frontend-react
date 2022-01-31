@@ -40,7 +40,7 @@ const AddFood = () => {
     };
 
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className="flex flex-col gap-2 max-w-xl mx-auto">
             <div>
                 <label>Name</label>
                 <input
@@ -102,7 +102,7 @@ const AddFood = () => {
                 />
             </div>
             <div>
-                <label>Public</label>
+                <label>Public </label>
                 <input
                     type="checkbox"
                     name="is_public"
@@ -110,9 +110,9 @@ const AddFood = () => {
                     onChange={onChange}
                 />
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between mt-5">
                 <input className="btn btn-primary" type="submit" value="Add" />
-                <input className="btn bg-red-400" type="submit" value="Cancel" />
+                <input className="btn btn-primary" type="submit" value="Cancel" />
             </div>
         </form>
     );
