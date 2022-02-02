@@ -1,4 +1,7 @@
 # dietta-frontend-react
+
+![screenshot](screenshot.png)
+
 A Frontend for the Dietta App
 
 Currently supports keeping track of a daily diary of consumed foods,
